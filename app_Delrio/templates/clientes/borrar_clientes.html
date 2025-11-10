@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}Borrar Cliente{% endblock %}
+
+{% block content %}
+<div class="card p-4">
+    <h2 class="card-title text-center mb-4">Borrar Cliente</h2>
+    <div class="alert alert-danger text-center" role="alert">
+        <p>¿Estás seguro de que deseas eliminar al cliente <strong>{{ cliente.nom_clie }} {{ cliente.apellido_clie }}</strong>?</p>
+        <p>Esta acción no se puede deshacer.</p>
+    </div>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+            <button type="submit" class="btn btn-danger btn-lg me-md-2">Sí, Eliminar</button>
+            <a href="{% url 'ver_clientes' %}" class="btn btn-secondary btn-lg">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

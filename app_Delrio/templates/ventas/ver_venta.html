@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+
+{% block title %}Ver Ventas{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <h1 class="mb-4 text-primary"><i class="fas fa-shopping-bag me-2"></i>Listado de Ventas</h1>
+
+        <div class="d-flex justify-content-end mb-3">
+            <a href="{% url 'agregar_venta' %}" class="btn btn-success">
+                <i class="fas fa-plus-circle me-1"></i>Agregar Nueva Venta
+            </a>
+        </div>
+
+        {% if ventas %}
+        <div class="table-responsive">
+            <table class="table table-hover table-striped shadow-sm">
+                <thead class="bg-dark text-white">
+                    <tr>
+                        <th scope="col">ID Venta</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Producto</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Estado</th>
+                        <th scope="col">Fecha Venta</th>
+                        <th scope="col">Empleado ID</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venta in ventas %}
+                    <tr>
+                        <td>{{ venta.id }}</td>
+                        <td>{{ venta.id_clie.nom_clie }} {{ venta.id_clie.apellido_clie }}</td>
+                        <td>{{ venta.id_prod.nom_prod }}</td>
+                        <td>${{ venta.total_venta }}</td>
+                        <td>
+                            {% if venta.estado == 'Completada' %}
+                                <span class="badge bg-success">{{ venta.estado }}</span>
+                            {% elif venta.estado == 'Pendiente' %}
+                                <span class="badge bg-warning text-dark">{{ venta.estado }}</span>
+                            {% elif venta.estado == 'Cancelada' %}
+                                <span class="badge bg-danger">{{ venta.estado }}</span>
+                            {% else %}
+                                <span class="badge bg-info">{{ venta.estado }}</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ venta.fech_venta|date:"d M Y H:i" }}</td>
+                        <td>{{ venta.id_empl }}</td>
+                        <td>
+                            <a href="{% url 'actualizar_venta' venta.id %}" class="btn btn-sm btn-warning me-1" title="Editar">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal{{ venta.id }}" title="Eliminar">
+                                <i class="fas fa-trash-alt"></i>
+                            </button>
+
+                            <!-- Modal de Confirmación de Borrado -->
+                            <div class="modal fade" id="confirmDeleteModal{{ venta.id }}" tabindex="-1" aria-labelledby="confirmDeleteModalLabel{{ venta.id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-danger text-white">
+                                            <h5 class="modal-title" id="confirmDeleteModalLabel{{ venta.id }}">Confirmar Eliminación</h5>
+                                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ¿Estás seguro de que quieres eliminar la venta <strong>#{{ venta.id }}</strong> del cliente <strong>{{ venta.id_clie.nom_clie }} {{ venta.id_clie.apellido_clie }}</strong>?
+                                            Esta acción no se puede deshacer.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                                            <form action="{% url 'borrar_venta' venta.id %}" method="post" style="display:inline;">
+                                                {% csrf_token %}
+                                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="alert alert-info" role="alert">
+            <h4 class="alert-heading"><i class="fas fa-info-circle me-2"></i>No hay ventas registradas.</h4>
+            <p>Puedes <a href="{% url 'agregar_venta' %}" class="alert-link">agregar una nueva venta</a> para empezar.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title %}Agregar Cliente{% endblock %}
+
+{% block content %}
+<div class="card p-4">
+    <h2 class="card-title text-center mb-4">Agregar Nuevo Cliente</h2>
+    <form method="POST">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="nom_clie" class="form-label">Nombre:</label>
+            <input type="text" class="form-control" id="nom_clie" name="nom_clie" required>
+        </div>
+        <div class="mb-3">
+            <label for="apellido_clie" class="form-label">Apellido:</label>
+            <input type="text" class="form-control" id="apellido_clie" name="apellido_clie" required>
+        </div>
+        <div class="mb-3">
+            <label for="C_E_clie" class="form-label">Correo Electrónico:</label>
+            <input type="email" class="form-control" id="C_E_clie" name="C_E_clie" required>
+        </div>
+        <div class="mb-3">
+            <label for="tel_clie" class="form-label">Teléfono:</label>
+            <input type="tel" class="form-control" id="tel_clie" name="tel_clie" required>
+        </div>
+        <div class="mb-3">
+            <label for="direc_clie" class="form-label">Dirección:</label>
+            <textarea class="form-control" id="direc_clie" name="direc_clie" rows="3" required></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="fech_compra" class="form-label">Fecha de Compra:</label>
+            <input type="date" class="form-control" id="fech_compra" name="fech_compra" required>
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+            <a href="{% url 'ver_clientes' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

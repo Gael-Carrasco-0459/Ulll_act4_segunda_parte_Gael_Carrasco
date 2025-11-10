@@ -1,0 +1,45 @@
+<!-- app_Delrio/templates/inicio.html -->
+{% extends 'base.html' %}
+
+{% block title %}Inicio - Delrio{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12 text-center mb-4">
+        <h1 class="display-4 text-primary">Bienvenido al Sistema de Administración Delrio</h1>
+        <p class="lead">Gestiona tus ventas, clientes y productos de manera eficiente.</p>
+    </div>
+</div>
+
+<div class="row justify-content-center mb-5">
+    <div class="col-lg-8">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title text-success mb-3"><i class="fas fa-info-circle me-2"></i>Sobre el Sistema Delrio</h5>
+                <p class="card-text">
+                    Este sistema está diseñado para facilitar la administración de las operaciones de venta de Delrio.
+                    Podrás registrar nuevas ventas, mantener un control de los productos y gestionar la información de tus clientes.
+                    Nuestro objetivo es ofrecerte una herramienta robusta y fácil de usar para optimizar tus procesos.
+                </p>
+                <hr>
+                <p class="card-text text-muted">¡Empieza a administrar tu negocio con Delrio hoy mismo!</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-8 text-center">
+        <h4>Nuestra Visión</h4>
+        <p>
+            En Delrio, nos esforzamos por ser líderes en la gestión de servicios y productos, garantizando la satisfacción de nuestros clientes
+            y la eficiencia en cada una de nuestras operaciones.
+        </p>
+        <div class="mt-4">
+            <!-- Imagen representativa de Delrio (reemplaza con una URL real si lo deseas) -->
+            <img src="https://delriosa.com/wp-content/uploads/2023/05/cropped-Logo_DR_QTT2.png" class="img-fluid rounded shadow-sm" alt="Imagen representativa de Delrio">
+            <small class="text-muted d-block mt-2">Imagen ilustrativa del concepto Delrio.</small>
+        </div>
+    </div>
+</div>
+{% endblock %}
